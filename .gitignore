@@ -1,0 +1,4 @@
+libs/
+obj/
+compiled.bk/
+jni/external/openssh/.idea/*
