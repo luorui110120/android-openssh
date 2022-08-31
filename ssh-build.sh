@@ -46,10 +46,17 @@ $ANDROID_NDK_ROOT/ndk-build -j$NCPU || exit 1
 echo ">>> copy"
 cd ../
 [ -d compiled ] && mv compiled compiled.bk
-mkdir -p compiled/armeabi-v7a/{lib,bin}
-cp -v libs/armeabi-v7a/{scp,sftp,sftp-server,sshd,ssh_exe,ssh-keygen} compiled/armeabi-v7a/bin/
-cp -v libs/armeabi-v7a/libssh.so compiled/armeabi-v7a/lib/
-cp -v libs/armeabi-v7a/libcrypto.so compiled/armeabi-v7a/lib/
-cp -v libs/armeabi-v7a/libssl.so compiled/armeabi-v7a/lib/
+mkdir -p compiled/armeabi-v7a/{lib,bin_back}
+cp -v libs/armeabi-v7a/{scp,sftp,sftp-server,sshd,ssh_exe,ssh-keygen} compiled/armeabi-v7a/bin_back/
+cp -v libs/armeabi-v7a/ssh_exe compiled/armeabi-v7a/bin_back/ssh
+cp -v libs/armeabi-v7a/libmyssh.so compiled/armeabi-v7a/lib/
+cp -v libs/armeabi-v7a/libmycrypto.so compiled/armeabi-v7a/lib/
+cp -v libs/armeabi-v7a/libmyssl.so compiled/armeabi-v7a/lib/
+cp -v start.sh compiled/armeabi-v7a/
+cp -v busybox compiled/armeabi-v7a/bin_back/
+cp -v -R ssh compiled/armeabi-v7a/.ssh
+## debug
 adb push libs/armeabi-v7a/sshd /data/local/tmp/armeabi-v7a/bin/
-adb push libs/armeabi-v7a/libssh.so /data/local/tmp/armeabi-v7a/lib/
+adb push libs/armeabi-v7a/libmyssh.so /data/local/tmp/armeabi-v7a/lib/
+adb push libs/armeabi-v7a/libmycrypto.so /data/local/tmp/armeabi-v7a/lib/
+adb push libs/armeabi-v7a/libmyssl.so /data/local/tmp/armeabi-v7a/lib/

@@ -26,7 +26,7 @@ LOCAL_SRC_FILES += $(target_src_files)
 LOCAL_CFLAGS += $(target_c_flags)
 LOCAL_C_INCLUDES += $(target_c_includes)
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE:= libcrypto_static
+LOCAL_MODULE:= mycrypto_static
 LOCAL_ADDITIONAL_DEPENDENCIES := $(local_additional_dependencies)
 include $(BUILD_STATIC_LIBRARY)
 
@@ -51,7 +51,7 @@ LOCAL_SRC_FILES += $(target_src_files)
 LOCAL_CFLAGS += $(target_c_flags)
 LOCAL_C_INCLUDES += $(target_c_includes)
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE:= libcrypto
+LOCAL_MODULE:= mycrypto
 LOCAL_ADDITIONAL_DEPENDENCIES := $(local_additional_dependencies)
 include $(BUILD_SHARED_LIBRARY)
 
@@ -65,7 +65,7 @@ LOCAL_CFLAGS += $(host_c_flags) -DPURIFY
 LOCAL_C_INCLUDES += $(host_c_includes)
 LOCAL_LDLIBS += -ldl
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE:= libcrypto-host
+LOCAL_MODULE:= mycrypto-host
 LOCAL_ADDITIONAL_DEPENDENCIES := $(local_additional_dependencies)
 include $(BUILD_HOST_SHARED_LIBRARY)
 
@@ -80,7 +80,7 @@ LOCAL_CFLAGS += $(host_c_flags) -DPURIFY
 LOCAL_C_INCLUDES += $(host_c_includes)
 LOCAL_LDLIBS += -ldl
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE:= libcrypto_static
+LOCAL_MODULE:= mycrypto_static
 LOCAL_ADDITIONAL_DEPENDENCIES := $(local_additional_dependencies)
 # Not supported by NDK
 #include $(BUILD_HOST_STATIC_LIBRARY)

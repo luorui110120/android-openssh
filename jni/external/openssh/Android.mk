@@ -35,10 +35,10 @@ LOCAL_SRC_FILES := \
 LOCAL_C_INCLUDES := external/openssl/include external/zlib ./
 PRIVATE_C_INCLUDES := external/openssl/openbsd-compat
 
-LOCAL_SHARED_LIBRARIES +=  libdl libssl libcrypto
+LOCAL_SHARED_LIBRARIES +=  libdl myssl mycrypto
 LOCAL_LDLIBS := -lz
 
-LOCAL_MODULE := libssh
+LOCAL_MODULE := myssh
 
 LOCAL_CFLAGS+=-O3
 
@@ -60,7 +60,7 @@ LOCAL_MODULE := ssh_exe
 LOCAL_C_INCLUDES := external/openssl/include
 PRIVATE_C_INCLUDES := external/openssl/openbsd-compat
 
-LOCAL_SHARED_LIBRARIES += libssh libssl libcrypto libdl libz
+LOCAL_SHARED_LIBRARIES += myssh myssl mycrypto libdl libz
 
 LOCAL_CFLAGS           += -fPIE
 LOCAL_LDFLAGS          += -pie -fPIE
@@ -81,7 +81,7 @@ LOCAL_MODULE := sftp
 LOCAL_C_INCLUDES := external/openssl/include
 PRIVATE_C_INCLUDES := external/openssl/openbsd-compat
 
-LOCAL_SHARED_LIBRARIES += libssh libssl libcrypto libdl libz
+LOCAL_SHARED_LIBRARIES += myssh myssl mycrypto libdl libz
 
 LOCAL_CFLAGS           += -fPIE
 LOCAL_LDFLAGS          += -pie -fPIE
@@ -102,7 +102,7 @@ LOCAL_MODULE := scp
 LOCAL_C_INCLUDES := external/openssl/include
 PRIVATE_C_INCLUDES := external/openssl/openbsd-compat
 
-LOCAL_SHARED_LIBRARIES += libssh libssl libcrypto libdl libz
+LOCAL_SHARED_LIBRARIES += myssh myssl mycrypto libdl libz
 
 LOCAL_CFLAGS           += -fPIE
 LOCAL_LDFLAGS          += -pie -fPIE
@@ -139,7 +139,7 @@ LOCAL_MODULE := sshd
 LOCAL_C_INCLUDES := external/openssl/include external/zlib
 PRIVATE_C_INCLUDES := external/openssl/openbsd-compat
 
-LOCAL_SHARED_LIBRARIES += libssh libssl libcrypto libdl libz
+LOCAL_SHARED_LIBRARIES += myssh myssl mycrypto libdl libz
 #LOCAL_STATIC_LIBRARIES := libssl_static libcrypto_static
 
 LOCAL_CFLAGS           += -fPIE
@@ -161,7 +161,7 @@ LOCAL_MODULE := sftp-server
 LOCAL_C_INCLUDES := external/openssl/include
 PRIVATE_C_INCLUDES := external/openssl/openbsd-compat
 
-LOCAL_SHARED_LIBRARIES += libssh libssl libcrypto libdl libz
+LOCAL_SHARED_LIBRARIES += myssh myssl mycrypto libdl libz
 
 LOCAL_CFLAGS           += -fPIE
 LOCAL_LDFLAGS          += -pie -fPIE
@@ -182,7 +182,7 @@ LOCAL_MODULE := ssh-keygen
 LOCAL_C_INCLUDES := external/openssl/include
 PRIVATE_C_INCLUDES := external/openssl/openbsd-compat
 
-LOCAL_SHARED_LIBRARIES += libssh libssl libcrypto libdl libz
+LOCAL_SHARED_LIBRARIES += myssh myssl mycrypto libdl libz
 
 LOCAL_CFLAGS           += -fPIE
 LOCAL_LDFLAGS          += -pie -fPIE

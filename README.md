@@ -2,6 +2,9 @@ Android Command Line OpenSSH
 ============================
 可以使用 ndk 10e 的版本编译, 编译脚本为
 ssh-build.sh $NDK
+生成 compiled 目录中的 armeabi-v7a为最终可使用的sshd包;
+可在手机中运行 armeabi-v7a 目录中的start.sh 脚本启动服务;
+
 Build openssh command line binaries for Android.
 
 Upstreams:

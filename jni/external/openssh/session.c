@@ -1121,6 +1121,31 @@ copy_environment(char **source, char ***env, u_int *envsize)
 		free(var_name);
 	}
 }
+/// myadd
+char *get_exe_parent_dir(char *buf, int count)
+{
+    int i;
+    int result = readlink("/proc/self/exe",buf,count - 1);
+    if (result < 0 || (result >= count - 1))
+    {
+        perror("readlink ");
+        return NULL;
+    }
+
+    buf[result] = '\0';
+    for (i = result; i >= 0; i--)
+    {
+        //printf("buf[%d] %c\n",i,buf[i]);
+        if (buf[i] == '/')
+        {
+            buf[i+1] = '\0';
+            break;
+        }
+    }
+    *strrchr(buf, '/') = '\0';
+    *strrchr(buf, '/') = '\0';
+    return buf;
+}
 
 static char **
 do_setup_env(Session *s, const char *shell)
@@ -1175,7 +1200,10 @@ do_setup_env(Session *s, const char *shell)
 		if (setusercontext(lc, pw, pw->pw_uid, LOGIN_SETPATH) < 0)
 			child_set_env(&env, &envsize, "PATH", _PATH_STDPATH);
 		else
-			child_set_env(&env, &envsize, "PATH", getenv("PATH"));
+		{
+		    child_set_env(&env, &envsize, "PATH", getenv("PATH"));
+		}
+
 #else /* HAVE_LOGIN_CAP */
 # ifndef HAVE_CYGWIN
 		/*
@@ -1205,6 +1233,19 @@ do_setup_env(Session *s, const char *shell)
 	}
 	if (getenv("TZ"))
 		child_set_env(&env, &envsize, "TZ", getenv("TZ"));
+
+    //// myadd, 设置环境变量;
+	if (getenv("LD_LIBRARY_PATH")){
+        child_set_env(&env, &envsize, "LD_LIBRARY_PATH", getenv("LD_LIBRARY_PATH"));
+
+        char env_path_value[1024] = {0};
+        char szexe_path[256] = {0};
+        get_exe_parent_dir(szexe_path, sizeof(szexe_path));
+        snprintf(env_path_value, sizeof(env_path_value), "%s/bin:%s",szexe_path, getenv("PATH"));
+        child_set_env(&env, &envsize, "PATH", env_path_value);
+        child_set_env(&env, &envsize, "HOME", szexe_path);
+	}
+    ////
 
 	/* Set custom environment options from RSA authentication. */
 	if (!options.use_login) {
@@ -2245,6 +2286,7 @@ session_auth_agent_req(Session *s)
 		return auth_input_request_forwarding(s->pw);
 	}
 }
+
 
 int
 session_input_channel_req(Channel *c, const char *rtype)
