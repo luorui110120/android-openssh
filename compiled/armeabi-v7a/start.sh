@@ -11,7 +11,7 @@ if [ $res -eq 0 ]; then
   chmod 755 $ROOTPATH/bin/*
 	$ROOTPATH/bin/busybox --install -s $ROOTPATH/bin
 	##del reboot  Incompatible
-	rm $ROOTPATH/bin/reboot
+	rm $ROOTPATH/bin/reboot > /dev/null 2>&1
 fi
 
 chmod 600 $ROOTPATH/.ssh/*

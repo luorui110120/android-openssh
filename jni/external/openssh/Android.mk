@@ -53,7 +53,7 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_SRC_FILES := \
     ssh.c readconf.c clientloop.c sshtty.c \
     sshconnect.c sshconnect1.c sshconnect2.c mux.c \
-    roaming_common.c roaming_client.c
+    roaming_common.c roaming_client.c openbsd-compat/bsd-arc4random.c
 
 LOCAL_MODULE := ssh_exe
 
@@ -130,7 +130,7 @@ LOCAL_SRC_FILES := \
 	sftp-server.c sftp-common.c \
 	roaming_common.c roaming_serv.c \
 	sandbox-null.c sandbox-rlimit.c sandbox-systrace.c \
-	sandbox-seccomp-filter.c
+	sandbox-seccomp-filter.c openbsd-compat/bsd-arc4random.c
 
 # auth-passwd.c
 
@@ -175,7 +175,8 @@ include $(CLEAR_VARS)
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_SRC_FILES := \
-    ssh-keygen.c
+    ssh-keygen.c openbsd-compat/bsd-arc4random.c
+
 
 LOCAL_MODULE := ssh-keygen
 

@@ -45,7 +45,8 @@ $ANDROID_NDK_ROOT/ndk-build -j$NCPU || exit 1
 
 echo ">>> copy"
 cd ../
-[ -d compiled ] && mv compiled compiled.bk
+[ -d compiled ] && rm -R compiled
+##copy arm32
 mkdir -p compiled/armeabi-v7a/{lib,bin_back}
 cp -v libs/armeabi-v7a/{scp,sftp,sftp-server,sshd,ssh_exe,ssh-keygen} compiled/armeabi-v7a/bin_back/
 cp -v libs/armeabi-v7a/ssh_exe compiled/armeabi-v7a/bin_back/ssh
@@ -53,10 +54,19 @@ cp -v libs/armeabi-v7a/libmyssh.so compiled/armeabi-v7a/lib/
 cp -v libs/armeabi-v7a/libmycrypto.so compiled/armeabi-v7a/lib/
 cp -v libs/armeabi-v7a/libmyssl.so compiled/armeabi-v7a/lib/
 cp -v start.sh compiled/armeabi-v7a/
-cp -v busybox compiled/armeabi-v7a/bin_back/
+cp -v busybox32 compiled/armeabi-v7a/bin_back/busybox
 cp -v -R ssh compiled/armeabi-v7a/.ssh
+
+##copy arm64
+mkdir -p compiled/arm64-v8a/{lib,bin_back}
+cp -v libs/arm64-v8a/{scp,sftp,sftp-server,sshd,ssh_exe,ssh-keygen} compiled/arm64-v8a/bin_back/
+cp -v libs/arm64-v8a/ssh_exe compiled/arm64-v8a/bin_back/ssh
+cp -v libs/arm64-v8a/libmyssh.so compiled/arm64-v8a/lib/
+cp -v libs/arm64-v8a/libmycrypto.so compiled/arm64-v8a/lib/
+cp -v libs/arm64-v8a/libmyssl.so compiled/arm64-v8a/lib/
+cp -v start.sh compiled/arm64-v8a/
+cp -v busybox64 compiled/arm64-v8a/bin_back/busybox
+cp -v -R ssh compiled/arm64-v8a/.ssh
 ## debug
-adb push libs/armeabi-v7a/sshd /data/local/tmp/armeabi-v7a/bin/
-adb push libs/armeabi-v7a/libmyssh.so /data/local/tmp/armeabi-v7a/lib/
-adb push libs/armeabi-v7a/libmycrypto.so /data/local/tmp/armeabi-v7a/lib/
-adb push libs/armeabi-v7a/libmyssl.so /data/local/tmp/armeabi-v7a/lib/
+adb push compiled/arm64-v8a /data/local/tmp/
+adb push compiled/armeabi-v7a /data/local/tmp/
